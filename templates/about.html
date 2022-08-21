@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Informacije o projektu</title>
+        <link rel="shortcut icon" href='https://icon-library.com/images/icon-for-about/icon-for-about-18.jpg' type="image/x-icon">
+    <style>
+    body {
+    
+    background-image: url("https://i0.hippopx.com/photos/444/990/461/ocean-water-black-and-white-background-preview.jpg");
+    }
+
+    .div1,
+    .div2 {
+    border: 1px solid rgb(0, 0, 0);
+    }
+    .div3{
+        border: 1px solid black;
+    }
+
+    .div1,
+    .div2 {
+    display: inline-block;
+    }
+    .div3{
+        display: inline-block;
+    }
+    h1{
+        margin-left:40px;
+    }
+
+    .tekst1{
+        text-align: center;
+        border: 3px solid rgb(0, 0, 0);
+    }
+
+    img{
+        border:3px solid black;
+    }
+    a:hover + div {
+            display: block;
+            color: rgb(132, 146, 132);
+            font-size: 25px;
+        }
+    </style>
+    </head>
+    <body>
+        <div class="div1">
+            <h1>Informacije o projektu</h1>
+            <div class="tekst1">Projektni zadatak jeste da se napravi geoportal na kom su<br> publikovani 2D podaci o pešačkim stazama na Fruškoj gori,<br> kao i 3D prikaz tih podataka.</div>
+            <p> <img src="http://geoinformatika.uns.ac.rs/wp-content/uploads/2017/11/1-1.jpg" style="width:450px;height:300px" > </p>
+        </div>
+        <div class="div2">
+            <h1>2D PRIKAZ</h1>
+            <div class="tekst1">2D podaci ekstenzije *.shp su publikovani i stilizovani na Geoserveru.<br> Za vizualizaciju podataka je korištena biblioteka Leaflet,<br> a podaci su učitani preko WMS Geoservera.</div>
+            <p><img src="https://fiverr-res.cloudinary.com/images/t_main1,q_auto,f_auto,q_auto,f_auto/gigs/104227048/original/3b1e448c19e839fa0ca928c0055ab57b921e8c20/desploy-map-system-using-geoserver-geowebcache.png" style="width: 450px;;height:300px"></p>
+            </div> 
+            <div class="div3">
+                <h1>3D PRIKAZ</h1>
+                <div class = "tekst1">Podaci o pešačkim stazama su najpre konvertovani iz shp u GeoJSON format<br> radi njihovog prikaza u CesiumION okruženju. Podaci su učitani<br> na cloud platformu CesiumIon pri čemu su automatski<br> transformisani u 3DTiles format. Za vizualizaciju je korištena<br> Cesium biblioteka.</div>
+                <p> <img src="https://media.springernature.com/original/springer-static/image/art%3A10.1186%2Fs40965-018-0046-7/MediaObjects/40965_2018_46_Fig8_HTML.png" style="width: 450px;;height:300px;"> </p>
+        </div>   
+    </body>
+</html>

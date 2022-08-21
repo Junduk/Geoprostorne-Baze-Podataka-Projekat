@@ -1,0 +1,68 @@
+{% load static %} 
+<!doctype html>
+<html lang="en">
+    <head>   
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--Homepage style (made in static/css)-->
+        <link rel="icon" href="{% static 'img/Logo.jpg' %}" type="image/x-icon">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/homepage.css' %}">
+        <title>Geoprostorne baze podataka</title>
+
+        <ul>
+            <li><a class="active" style="width: 100px" href="#homepage">Homepage</a></li>
+            <li><a href="#2d" style="width: 100px">2D</a></li>
+            <li><a href="#3d" style="width: 100px">3D</a></li>
+            <li><a href="#profili" style="width: 100px">Profili</a></li>
+            <li><a href="#opis" style="width: 100px">Opis</a></li>
+            <p class="welcome">Dobrodošli na geoportal</p>
+        </ul>
+    </head>
+    <body>
+        <section>
+            <nav>
+            <ul class="second">
+                <li><a href="#">London</a></li>
+                <li><a href="#">Paris</a></li>
+                <li><a href="#">Tokyo</a></li>
+            </ul>
+            </nav>
+            
+            <article>
+            <h1>London</h1>
+            <p>London is the capital city of England. It is the most populous city in the  United Kingdom, with a metropolitan area of over 13 million inhabitants.</p>
+            <p>Standing on the River Thames, London has been a major settlement for two millennia, its history going back to its founding by the Romans, who named it Londinium.</p>
+            </article>
+        </section>
+        
+        <footer>
+        <p>Footer</p>
+        </footer>
+        <!--<div id="map"></div>
+        <script type="text/javascript" >
+            $.ajax('http://localhost:8080/geoserver/wfs',{
+                type: 'GET',
+                data: {
+                    service: 'WFS',
+                    version: '1.1.0',
+                    request: 'GetFeature',
+                    typename: 'gbp:etape_trekovi',
+                    srsname: 'EPSG:32634',
+                    outputFormat: 'text/javascript',
+                    },
+                dataType: 'json',
+                jsonpCallback:'callback:handleJson',
+                jsonp:'format_options'
+                });
+
+                // the ajax callback function
+                function handleJson(data) {
+                    selectedArea = L.geoJson(data).addTo(map);
+                map.fitBounds(selectedArea.getBounds());
+                }
+        </script>
+    -->
+        <!-- <img src="{% static 'img/Logo.jpg' %}"> -->
+    </body>
+</html>

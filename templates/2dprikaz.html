@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>2D prikaz</title>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href='https://www.nicepng.com/png/full/326-3261251_2d-art-services-2-d-logo.png' type="image/x-icon">
+    
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+            integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+            crossorigin="">
+        <script src="//d3js.org/d3.v4.js"></script>
+        <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+            integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+            crossorigin=""></script>
+        <script src="https://unpkg.com/@raruto/leaflet-elevation/dist/leaflet-elevation.js"></script>
+    
+        <!--<script src="http://leaflet.github.io/Leaflet.draw/docs/examples/libs/leaflet-src.js"></script>
+        <link rel="stylesheet" href="http://leaflet.github.io/Leaflet.draw/docs/examples/libs/leaflet.css"/> -->
+
+        <script src="http://leaflet.github.io/Leaflet.draw/src/Leaflet.draw.js"></script>
+        <script src="http://leaflet.github.io/Leaflet.draw/src/Leaflet.Draw.Event.js"></script>
+        <link rel="stylesheet" href="http://leaflet.github.io/Leaflet.draw/src/leaflet.draw.css"/>
+
+        <script src="http://leaflet.github.io/Leaflet.draw/src/Toolbar.js"></script>
+        <script src="http://leaflet.github.io/Leaflet.draw/src/Tooltip.js"></script>
+
+        <script src="http://leaflet.github.io/Leaflet.draw/src/ext/GeometryUtil.js"></script>
+        <script src="http://leaflet.github.io/Leaflet.draw/src/ext/LatLngUtil.js"></script>
+        <script src="http://leaflet.github.io/Leaflet.draw/src/ext/LineUtil.Intersect.js"></script>
+        <script src="http://leaflet.github.io/Leaflet.draw/src/ext/Polygon.Intersect.js"></script>
+        <script src="http://leaflet.github.io/Leaflet.draw/src/ext/Polyline.Intersect.js"></script>
+        <script src="http://leaflet.github.io/Leaflet.draw/src/ext/TouchEvents.js"></script>
+
+        <script src="http://leaflet.github.io/Leaflet.draw/src/draw/DrawToolbar.js"></script>
+        <script src="http://leaflet.github.io/Leaflet.draw/src/draw/handler/Draw.Feature.js"></script>
+        <script src="http://leaflet.github.io/Leaflet.draw/src/draw/handler/Draw.SimpleShape.js"></script>
+        <script src="http://leaflet.github.io/Leaflet.draw/src/draw/handler/Draw.Polyline.js"></script>
+        <script src="http://leaflet.github.io/Leaflet.draw/src/draw/handler/Draw.Marker.js"></script>
+        <script src="http://leaflet.github.io/Leaflet.draw/src/draw/handler/Draw.Circle.js"></script>
+        <script src="http://leaflet.github.io/Leaflet.draw/src/draw/handler/Draw.CircleMarker.js"></script>
+        <script src="http://leaflet.github.io/Leaflet.draw/src/draw/handler/Draw.Polygon.js"></script>
+        <script src="http://leaflet.github.io/Leaflet.draw/src/draw/handler/Draw.Rectangle.js"></script>
+
+
+        <script src="http://leaflet.github.io/Leaflet.draw/src/edit/EditToolbar.js"></script>
+        <script src="http://leaflet.github.io/Leaflet.draw/src/edit/handler/EditToolbar.Edit.js"></script>
+        <script src="http://leaflet.github.io/Leaflet.draw/src/edit/handler/EditToolbar.Delete.js"></script>
+
+        <script src="http://leaflet.github.io/Leaflet.draw/src/Control.Draw.js"></script>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+        <script src="http://leaflet.github.io/Leaflet.draw/src/edit/handler/Edit.Poly.js"></script>
+        <script src="http://leaflet.github.io/Leaflet.draw/src/edit/handler/Edit.SimpleShape.js"></script>
+        <script src="http://leaflet.github.io/Leaflet.draw/src/edit/handler/Edit.Rectangle.js"></script>
+        <script src="http://leaflet.github.io/Leaflet.draw/src/edit/handler/Edit.Marker.js"></script>
+        <script src="http://leaflet.github.io/Leaflet.draw/src/edit/handler/Edit.CircleMarker.js"></script>
+        <script src="http://leaflet.github.io/Leaflet.draw/src/edit/handler/Edit.Circle.js"></script>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet-minimap@3.6.1/dist/Control.MiniMap.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/leaflet-minimap@3.6.1/dist/Control.MiniMap.min.js" type="text/javascript"></script>
+
+        <link rel="stylesheet" href="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.css">
+        <script src="https://unpkg.com/@geoman-io/leaflet-geoman-free@latest/dist/leaflet-geoman.min.js"></script>
+
+    <style>
+            body {
+                padding: 0;
+                margin: 0;
+            }
+            html, body, #mapid {
+                height: 100%;
+                width: 100%;
+            }
+        </style>
+    
+    </head>
+    <body>
+        <div id="mapid"></div>
+        <div id="map"></div>
+        <script src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <!-- <script src="L.TileLayer.BetterWMS.js"></script> -->
+        <script>
+            // Set a cross-site cookie for third-party contexts
+            //document.cookie = 'cookie2=value2; SameSite=None; Secure';
+        </script>
+        <script>
+        //podesavanje parametara za prikaz slojeva
+        var mbAttr = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+            '<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+            'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+            mbUrl = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw';
+        var grayscale = L.tileLayer(mbUrl, {id: 'mapbox/light-v10', tileSize: 512, zoomOffset: -1, attribution: mbAttr}),
+            streets   = L.tileLayer(mbUrl, {id: 'mapbox/streets-v11', tileSize: 512, zoomOffset: -1, attribution: mbAttr}),
+            dark =      L.tileLayer(mbUrl, {id: 'mapbox/dark-v10', tileSize: 512, zoomOffset: -1, attribution: mbAttr}),
+            outdoors =  L.tileLayer(mbUrl, {id: 'mapbox/outdoors-v11', tileSize: 512, zoomOffset: -1, attribution: mbAttr});
+        
+        //kreiranje mape
+        var mymap = L.map('mapid', {
+                    center: [45.1863581,19.6511585], 
+                    zoom: 11, 
+                    layers: outdoors
+                    });
+
+        //dodavanje mini-mape
+        var outdoors2 = L.tileLayer(mbUrl, {id: 'mapbox/outdoors-v11', tileSize: 512, zoomOffset: -1, attribution: mbAttr});
+        var miniMap = new L.Control.MiniMap(outdoors2, { toggleDisplay: true }).addTo(mymap);
+
+        //dodavanje slojeva u skup osnovni i njihovo postavljanje na mapu 
+        var baseMaps = {
+            "Grayscale": grayscale,
+            "Streets": streets,
+            "Dark":dark,
+            "Outdoors":outdoors
+        };
+
+        var layer1 = L.tileLayer.wms('http://localhost:8080/geoserver/gbp/wms', {
+            layers: 'gbp:Control-Stations_Project',
+            transparent: true,
+            format: 'image/png',
+            attribution: 'Geoserver'
+        });//.addTo(mymap);
+        console.log(layer1);
+        mymap.addLayer(layer1);
+        console.log(layer1);
+        //mymap.setView(new L.latLng(layer1.lat, layer1.lng), 8);
+
+        var layer2 = L.tileLayer.wms('http://localhost:8080/geoserver/gbp/wms', {
+            layers: 'gbp:Etape-trekovi-tracks_Project',
+            transparent: true,
+            format: 'image/png',
+            attribution: 'Geoserver'
+        });//.addTo(mymap);
+        mymap.addLayer(layer2);
+        //mymap.panTo(new L.latLng(layer1._map._lastCenter.lat, layer1._map._lastCenter.lng));
+
+        var layer3 = L.tileLayer.wms('http://localhost:8080/geoserver/gbp/wms', {
+            layers: 'gbp:Etno-selo_Project',
+            transparent: true,
+            format: 'image/png'
+        }).addTo(mymap);
+
+        var layer4 = L.tileLayer.wms('http://localhost:8080/geoserver/gbp/wms', {
+            layers: 'gbp:KT-10-11-Vrdnik-stara-kolonija-Manastir-Jazak',
+            transparent: true,
+            format: 'image/png',
+            attribution: "Geoserver"
+        }).addTo(mymap);
+
+        var layer5 = L.tileLayer.wms('http://localhost:8080/geoserver/gbp/wms', {
+            layers: 'gbp:KT-18-19-Andrevlje-2-Crveni-cot',
+            transparent: true,
+            format: 'image/png'
+        }).addTo(mymap);
+
+        var layer6 = L.tileLayer.wms('http://localhost:8080/geoserver/gbp/wms',{
+            layers:'gbp:KT-20-21-Crveni-cot-Monastery-Beocin',
+            transparent:true,
+            format:'image/png',
+            attribution:"Geoserver"
+        }).addTo(mymap);
+        
+        var overlays = {
+            "Crveni cot": layer1,
+            "Etape": layer2,
+            "Kontrolne stanice": layer3,
+            'Manastir Beocin': layer4,
+            'Etno selo': layer5,
+            'Manastir Jazak': layer6
+        };
+        L.control.layers(baseMaps,overlays).addTo(mymap);
+
+        //dodavanje kontrola za crtanje i editovanje
+        mymap.pm.addControls({});
+
+        //kreiranje iskacuceg prozora koji daje koordinate mjesta gdje se kliknulo
+        var popup = L.popup();
+        function onMapClick(e) {
+            popup
+                .setLatLng(e.latlng)
+                .setContent("You clicked the map at -<br>" + 
+                            "<b>lon:</b> " + e.latlng.lng + "<br>" + 
+                            "<b>lat:</b> " + e.latlng.lat)
+                .openOn(mymap)
+        };
+        mymap.on('click', onMapClick);
+
+        /*
+        //kada se klikne na layer, dobiju se informacije o njemu
+        mymap.addEventListener('click', onMapClick);
+        popup = new L.Popup({maxWidth: 1000});
+        function onMapClick(e) {
+        var latlngStr = '(' + e.latlng.lat.toFixed(3) + ', ' +         e.latlng.lng.toFixed(3) + ')';
+        var BBOX =         mymap.getBounds()._southWest.lng+","+mymap.getBounds()._southWest.lat+","+mymap.getBounds()._northEast.lng+","
+        +mymap.getBounds()._northEast.lat;
+        var WIDTH= mymap.getSize().x;
+        var HEIGHT = mymap.getSize().y;
+        var X = mymap.layerPointToContainerPoint(e.layerPoint).x;
+        var Y = mymap.layerPointToContainerPoint(e.layerPoint).y;
+        var URL = 'http://localhost:8000/geoserver/gbp/wms?SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&LAYERS=gbp:crveni_cot&QUERY_LAYERS=gbp:crveni_cot&propertyName=fclass,osm_id,name&STYLES=&BBOX='+BBOX+'&FEATURE_COUNT=2&HEIGHT='+HEIGHT+'&WIDTH='+WIDTH+'&FORMAT=image%2Fpng&INFO_FORMAT=text%2fhtml&SRS=EPSG%3A4326&X='+X+'&Y='+Y;
+        popup.setLatLng(e.latlng);
+        popup.setContent("<iframe src='"+URL+"' width='400' height='100' frameborder='0'></iframe>");
+        mymap.openPopup(popup);
+        
+        popup.setContent("You clicked the map at: <br>" + 
+                            "<b>Lon:</b> " + e.latlng.lng + "<br>" + 
+                            "<b>Lat:</b> " + e.latlng.lat);
+        }*/
+
+        /*ms_url="http://localhost:8080/geoserver/nikola/wms";
+        function Identify(e) 
+        { 
+            var BBOX = mymap.getBounds().toBBoxString();
+            var WIDTH = mymap.getSize().x;
+            var HEIGHT = mymap.getSize().y;
+            var X = mymap.layerPointToContainerPoint(e.layerPoint).x;
+            var Y = mymap.layerPointToContainerPoint(e.layerPoint).y;
+            var URL = ms_url + '?SERVICE=WMS&VERSION=1.1.0&REQUEST=GetFeatureInfo&LAYERS=nikola:gis_osm_places_a_free_1,nikola:gis_osm_traffic_free_1,nikola:gis_osm_roads_free_1&QUERY_LAYERS=nikola:gis_osm_places_a_free_1,nikola:gis_osm_traffic_free_1,nikola:gis_osm_roads_free_1&BBOX='+BBOX+'&FEATURE_COUNT=1&HEIGHT='+HEIGHT+'&WIDTH='+WIDTH+'&INFO_FORMAT=text%2Fhtml&SRS=EPSG%3A4326&X='+X+'&Y='+Y;
+            $.ajax({
+                url: URL,
+                dataType: "html",
+                type: "GET",
+                success: function(data) 
+                {
+                    var popup = new L.Popup
+                    ({
+                        maxWidth: 300                
+                    });
+                    popup.setContent(data);
+                    popup.setLatLng(e.latlng);
+                    mymap.openPopup(popup);
+                }
+            });
+        }*/
+        //mymap.on('click', Identify);
+
+        /*
+        var el = L.control.elevation({
+            position: "topright",
+            theme: "steelblue-theme", //default: lime-theme
+            width: 600,
+            height: 125,
+            margins: {
+                top: 10,
+                right: 20,
+                bottom: 30,
+                left: 50
+            },
+            useHeightIndicator: true, //if false a marker is drawn at map position
+            interpolation: d3.curveLinear, //see https://github.com/d3/d3-shape/blob/master/README.md#area_curve
+            hoverNumber: {
+                decimalsX: 3, //decimals on distance (always in km)
+                decimalsY: 0, //deciamls on hehttps://www.npmjs.com/package/leaflet.coordinatesight (always in m)
+                formatter: undefined //custom formatter function may be injected
+            },
+            xTicks: undefined, //number of ticks in x axis, calculated by default according to width
+            yTicks: undefined, //number of ticks on y axis, calculated by default according to height
+            collapsed: false,  //collapsed mode, show chart on click or mouseover
+            imperial: false    //display imperial units instead of metric
+        });
+        el.addTo(mymap);
+        */
+        </script>
+        <script>
+            var opts = {
+                map: {
+                    center: [41.4583, 12.7059],
+                    zoom: 5,
+                    fullscreenControl: false,
+                    resizerControl: true,
+                    preferCanvas: true,
+                    rotate: true,
+                    // bearing: 45,
+                    rotateControl: {
+                        closeOnZeroBearing: true
+                    },
+                },
+                elevationControl: {
+                    url: "https://raruto.github.io/leaflet-elevation/examples/via-emilia.gpx",
+                    options: {
+                        theme: "lightblue-theme",
+                        collapsed: false,
+                        autohide: false,
+                        autofitBounds: true,
+                        position: "bottomleft",
+                        detached: true,
+                        summary: "inline",
+                        imperial: false,
+                        // altitude: "disabled",
+                        slope: "disabled",
+                        speed: false,
+                        acceleration: false,
+                        time: "summary",
+                        legend: true,
+                        followMarker: true,
+                        almostOver: true,
+                        distanceMarkers: false,
+                        hotline: false,
+                    },
+                },
+                layersControl: {
+                    options: {
+                        collapsed: false,
+                    },
+                },
+            };
+    
+            var map = L.map('map', opts.map);
+    
+            var controlElevation = L.control.elevation(opts.elevationControl.options).addTo(map);
+            var controlLayer = L.control.layers(null, null, opts.layersControl.options);
+    
+            controlElevation.on('eledata_loaded', ({layer, name}) => controlLayer.addTo(map) && layer.eachLayer((trkseg) => trkseg.feature.geometry.type != "Point" && controlLayer.addOverlay(trkseg, trkseg.feature && trkseg.feature.properties && trkseg.feature.properties.name || name)));
+    
+            controlElevation.load(opts.elevationControl.url);
+        </script>    
+    </body>
+</html>
